@@ -1,0 +1,108 @@
+/* =========================================================
+   Components: the bloom hero and the home sections
+   ========================================================= */
+
+/* ---------- the bloom hero: a spot-lit rose in an evening room ---------- */
+.bloom-hero { position: relative; height: 340vh; margin-top: calc(var(--header-h) * -1); background: var(--night); }
+.bloom-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; color: var(--on-dark);
+  background: radial-gradient(ellipse 60% 70% at 68% 44%, #4b2029 0%, #2b1218 42%, #150a0d 78%); }
+.bloom-sticky::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(8,3,5,.55) 100%); }
+.rose-stage { position: absolute; inset: 0; z-index: 0; }
+.rose-stage canvas { width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.8s var(--ease-soft); }
+.rose-stage canvas.is-ready { opacity: 1; }
+.rose-svg { display: none; }
+.lite .rose-stage canvas { display: none; }
+.lite .rose-svg { display: block; }
+.hero-copy { position: absolute; z-index: 2; left: 0; right: 0; top: 50%; translate: 0 -44%; pointer-events: none; }
+.hero-copy > * { max-width: 600px; pointer-events: auto; }
+.hero-title { font-size: clamp(3.2rem, 7vw, 6.6rem) !important; }
+.hero-title em { color: var(--petal) !important; }
+.hero-copy .lead { margin-top: 28px; max-width: 40ch; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.bloom-meter { position: absolute; z-index: 2; right: var(--gutter); bottom: 36px; display: flex; align-items: center; gap: 14px; font-size: .66rem; letter-spacing: .26em; text-transform: uppercase; color: var(--on-dark-muted); }
+.bloom-meter i { position: relative; width: 160px; height: 1px; background: var(--line-dark); overflow: hidden; }
+.bloom-meter b { position: absolute; inset: 0; background: var(--brass); transform-origin: left; transform: scaleX(0); }
+.hero-scroll { position: absolute; z-index: 2; left: var(--gutter); bottom: 34px; display: flex; align-items: center; gap: 14px; font-size: .66rem; letter-spacing: .26em; text-transform: uppercase; color: var(--on-dark-muted); transition: opacity .8s; }
+.hero-scroll::before { content: ''; width: 1px; height: 40px; background: currentColor; transform-origin: top; animation: scrollHint 2.6s var(--ease) infinite; }
+@keyframes scrollHint { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+.bloom-hero.is-open .hero-scroll { opacity: 0; }
+
+/* the drawn rose (no WebGL) */
+.svg-rose { position: absolute; inset: 0; display: grid; place-items: center; }
+.svg-rose svg { width: min(70vmin, 620px); height: auto; overflow: visible; filter: drop-shadow(0 30px 40px rgba(26,13,17,.35)); }
+.sr-ring { transition: transform 1.4s var(--ease), opacity 1.2s; transform-origin: 0 0; }
+.bloom-hero .svg-rose { justify-items: end; padding-right: 6vw; }
+
+/* ---------- section numbers ---------- */
+.num { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--brass); }
+
+/* ---------- the four rooms ---------- */
+.cat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2.2vw, 32px); }
+.cat { display: block; text-decoration: none; }
+.cat:nth-child(even) { margin-top: clamp(40px, 6vw, 90px); }
+.cat-media { aspect-ratio: 3 / 4.3; overflow: hidden; border-radius: 999px 999px var(--radius) var(--radius); background: var(--linen); }
+.cat-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); transition: transform 1.8s var(--ease); filter: saturate(.92); }
+.cat:hover .cat-media img { transform: scale(1.08); }
+.cat-body { padding-top: 22px; display: grid; gap: 6px; }
+.cat-body .num { line-height: 1; }
+.cat-body h3 { font-size: 2.2rem !important; transition: font-style 0s, color .4s; }
+.cat:hover h3 { font-style: italic; color: var(--rose); }
+.cat-body p { color: var(--muted); font-size: .95rem; font-weight: 300; }
+.cat-body .label { margin-top: 6px; }
+
+/* ---------- price teaser ---------- */
+.price-teaser { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(36px, 7vw, 110px); align-items: start; }
+.price-teaser .lead { margin: 20px 0 32px; }
+.price-mini { display: grid; border-top: 1px solid var(--line-2); }
+.price-mini a { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: padding .7s var(--ease), color .4s; }
+.price-mini a:hover { padding-left: 12px; color: var(--rose); }
+.pm-name { font-family: var(--font-display); font-size: 1.45rem; line-height: 1.1; }
+.pm-name small { display: block; font-family: var(--font-body); font-size: .76rem; color: var(--faint); letter-spacing: .08em; margin-top: 4px; }
+.pm-dots { border-bottom: 1px dotted var(--line-2); transform: translateY(-6px); }
+.pm-price { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ---------- bridal teaser (an evening room) ---------- */
+.bride-teaser { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(36px, 7vw, 110px); align-items: center; }
+.bride-media { aspect-ratio: 4 / 5; overflow: hidden; border-radius: 999px 999px var(--radius) var(--radius); }
+.bride-media img { width: 100%; height: 100%; object-fit: cover; }
+.bride-teaser .lead { margin: 20px 0 30px; }
+.bride-list { display: grid; margin-bottom: 36px; border-top: 1px solid var(--line-dark); }
+.bride-list li { display: grid; grid-template-columns: 130px 1fr auto; gap: 16px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--line-dark); }
+.bride-list .display { font-size: 1.9rem; font-style: italic; color: var(--petal); }
+.bride-list span:nth-child(2) { color: var(--on-dark-muted); font-weight: 300; }
+.bride-list b { font-weight: 400; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* ---------- team ---------- */
+.team-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line-2); }
+.stylist { display: grid; gap: 10px; padding: 34px 24px 10px 0; }
+.stylist + .stylist { padding-left: 24px; border-left: 1px solid var(--line); }
+.stylist h3 { font-size: 1.7rem !important; }
+.stylist p { color: var(--muted); font-size: .92rem; font-weight: 300; }
+.avatar { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; flex: none; font-family: var(--font-display); font-style: italic; font-size: 1.45rem; color: var(--night); background: color-mix(in srgb, var(--tone) 55%, var(--ivory)); border: 1px solid color-mix(in srgb, var(--tone) 70%, var(--ink)); }
+
+/* ---------- quotes ---------- */
+.quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 3.4vw, 56px); }
+.quote { margin: 0; display: grid; gap: 18px; align-content: start; }
+.quote blockquote { margin: 0; font-size: clamp(1.45rem, 2vw, 1.8rem); line-height: 1.25; }
+.quote blockquote::before { content: '“'; display: block; font-size: 3.4rem; line-height: .6; color: var(--brass); margin-bottom: 8px; }
+
+@media (max-width: 1000px) {
+  .cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .team-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stylist:nth-child(3) { padding-left: 0; border-left: 0; }
+  .price-teaser, .bride-teaser { grid-template-columns: minmax(0, 1fr); }
+  .quotes { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .bloom-hero { height: 280vh; }
+  .hero-copy { top: auto; bottom: 84px; translate: none; }
+  .hero-title { font-size: clamp(2.7rem, 11.5vw, 3.5rem) !important; }
+  .hero-copy .lead { display: none; }
+  .bloom-sticky::before { content: ''; position: absolute; inset: auto 0 0; height: 58%; z-index: 1; background: linear-gradient(transparent, rgba(21,10,13,.92) 48%); pointer-events: none; }
+  .bloom-meter, .hero-scroll { display: none; }
+  .bloom-hero .svg-rose { justify-items: center; align-items: start; padding: 12vh 0 0; }
+  .bride-list li { grid-template-columns: 100px minmax(0, 1fr); }
+  .bride-list b { grid-column: 2; }
+  .team-row { grid-template-columns: minmax(0, 1fr); }
+  .stylist + .stylist { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+}
