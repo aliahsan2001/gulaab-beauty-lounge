@@ -1,5 +1,13 @@
 # Gulaab Beauty Lounge: "In bloom"
 
+[**Live demo**](https://gulaab-beauty-lounge.vercel.app) · [Source files](./src/) · [Local setup](#run-it)
+
+## Project at a glance
+
+A service/stylist/time booking flow, package comparisons, calendar export, and procedural rose animation.
+
+**Scope:** Frontend concept with fictional services and simulated slots. There is no shared booking calendar or payment backend.
+
 Concept project 5 of 8 for the Aqoa Systems portfolio. A fictional ladies' salon in DHA Phase 5, Karachi, offering hair, skin, nails, makeup, mehndi and bridal services.
 
 ## What's in it
@@ -34,7 +42,7 @@ The rose is procedural, so there are no model files:
 ## Run it
 From a terminal:
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 The site uses ES modules, so it needs a server. Opening `index.html` by double-clicking won't work. Testing flags: `?lite` forces the lighter version, `?full` forces 3D.
